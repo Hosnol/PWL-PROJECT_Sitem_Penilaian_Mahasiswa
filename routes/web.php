@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['role:admin'])->group(function (){
+    Route::get('/admin', [HomeController::class, 'admin'])->name('admin');
+});
+
+Route::middleware(['role:dosen'])->group(function (){
+    Route::get('/dosen', [HomeController::class, 'dosen'])->name('dosen');
+});
+
+Route::middleware(['role:mahasiswa'])->group(function (){
+    Route::get('/mahasiswa', [HomeController::class, 'mhs'])->name('mahasiswa');
+}); 
