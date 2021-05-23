@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dosen;
+use Illuminate\Support\Facades\Storage;
 
 class DosenController extends Controller
 {
@@ -25,7 +26,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        //
+        return view('create_dosen');
     }
 
     /**
@@ -36,7 +37,29 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nip' => 'required',
+            'nama' => 'required',
+            'jk' => 'required',
+            'email' => 'required',
+            'nohp' => 'required',
+            'alamat' => 'required',
+            'gambar' => 'required'
+        ]);
+
+        $image_name = $request->file('gambar')->store('image','public');
+
+        $dosen = new dosen;
+        $dosen->nip = $request->get('nip');
+        $dosen->nama = $request->get('nama');
+        $dosen->jk = $request->get('jk');
+        $dosen->email =$request->get('email');
+        $dosen->nohp =$request->get('nohp');
+        $dosen->alamat =$request->get('alamat');
+        $dosen->gambar = $image_name;
+        $dosen->save();
+
+        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil ditambahkan');
     }
 
     /**
@@ -58,7 +81,8 @@ class DosenController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dosen = Dosen::find($id);
+        return view('edit_dosen', compact('dosen'));
     }
 
     /**
@@ -70,7 +94,32 @@ class DosenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nip' => 'required',
+            'nama' => 'required',
+            'jk' => 'required',
+            'email' => 'required',
+            'nohp' => 'required',
+            'alamat' => 'required',
+            'gambar' => 'required'
+        ]);
+
+        $dosen = dosen::where('id',$id)->first();
+        $dosen->nip = $request->get('nip');
+        $dosen->nama = $request->get('nama');
+        $dosen->jk = $request->get('jk');
+        $dosen->email =$request->get('email');
+        $dosen->nohp =$request->get('nohp');
+        $dosen->alamat =$request->get('alamat');
+        
+        if($dosen->gambar && file_exists(storage_path('app/public/' . $dosen->gambar))){
+            Storage::delete('public/' . $dosen->gambar);
+        }
+        $image_name = $request->file('gambar')->store('image', 'public');
+        $dosen->gambar = $image_name;
+        $dosen->save();
+
+        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil diupdate');
     }
 
     /**
@@ -81,6 +130,17 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Dosen::find($id)->delete();
+        return redirect()->route('dosen.index')-> with('success', 'Data dosen berhasil dihapus');
+    }
+
+    public function cari(Request $request){
+        //melakukan validasi data
+        $cari=$request->cari;
+
+        $dosen = dosen::where('nama','like','%'.$cari.'%')
+        ->orwhere('nip','like','%'.$cari.'%')->paginate(5);
+
+        return view('index_dosen',['dsn'=>$dosen]);
     }
 }

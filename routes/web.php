@@ -26,6 +26,7 @@ Auth::routes();
 Route::middleware(['role:admin'])->group(function (){
     Route::get('/admin', [HomeController::class, 'admin'])->name('admin');
     Route::resource('admin/dosen', DosenController::class);
+    Route::get('/admin/cari',[DosenController::class,'cari'])->name('dosen.cari');
 });
 
 Route::middleware(['role:dosen'])->group(function (){
