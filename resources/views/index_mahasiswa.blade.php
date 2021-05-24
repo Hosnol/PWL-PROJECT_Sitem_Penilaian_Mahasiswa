@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">{{ __('Dosen') }}</div>
+                <div class="card-header">{{ __('Mahasiswa') }}</div>
                 <div class="card-body">
                     <div class="float-right my-2 mr-sm-2">
-                        <a class="btn btn-success" href="{{ route('dosen.create') }}"> Input Dosen </a>
+                        <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa </a>
                     </div>
                     <nav class="navbar">
-                        <form class="form-inline" action="{{ route('dosen.index') }}" method="GET">
-                            <input class="form-control mr-sm-2" type="search" name="cari" placeholder="Cari dosen..."
+                        <form class="form-inline" action="{{ route('mahasiswa.index') }}" method="GET">
+                            <input class="form-control mr-sm-2" type="search" name="cari" placeholder="Cari mahasiswa..."
                                 aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
@@ -26,28 +26,26 @@
                         <div class="table-responsive-sm">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>Nip</th>
+                                    <th>Nim</th>
                                     <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Email</th>
+                                    <th>Kelas</th>
                                     <th>No Handphone</th>
                                     <th>Alamat</th>
                                     <th>Foto</th>
                                     <th>Action</th>
                                 </tr>
-                                @foreach ($dsn as $dosen)
+                                @foreach ($mhs as $m)
                                 <tr>
-                                    <td>{{$dosen->nip}}</td>
-                                    <td>{{$dosen->nama}}</td>
-                                    <td>{{$dosen->jk}}</td>
-                                    <td>{{$dosen->email}}</td>
-                                    <td>{{$dosen->nohp}}</td>
-                                    <td>{{$dosen->alamat}}</td>
-                                    <td><img width="100px" height="100px" src="{{asset('storage/'.$dosen->gambar)}}"></td>
+                                    <td>{{ $m->nim }}</td>
+                                    <td>{{ $m->nama }}</td>
+                                    <td>{{ $m->kelas->nama_kelas }}</td>
+                                    <td>{{ $m->nohp }}</td>
+                                    <td>{{ $m->alamat }}</td>
+                                    <td><img width="100px" height="100px" src="{{ asset('storage/'.$m->foto) }}"></td>
                                     <td>
-                                        <form action="{{ route('dosen.destroy', $dosen->id) }}" method="POST"
+                                        <form action="{{ route('mahasiswa.destroy', $m->id) }}" method="POST"
                                             onsubmit="return confirm('Anda yakin ingin menghapus data?')">
-                                            <a class="btn btn-primary" href="{{ route('dosen.edit', $dosen->id) }}">Edit</a>
+                                            <a class="btn btn-primary" href="{{ route('mahasiswa.edit', $m->id) }}">Edit</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -57,7 +55,7 @@
                                 @endforeach
                             </table>
                             <div class="d-flex justify-content-center">
-                                {{ $dsn->links() }}
+                                {{ $mhs->links() }}
                             </div>
                         </div>
                     </div>

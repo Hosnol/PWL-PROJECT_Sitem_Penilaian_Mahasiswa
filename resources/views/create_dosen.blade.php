@@ -24,7 +24,7 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nim">Nip</label>
+                            <label for="nip">Nip</label>
                             <input type="text" name="nip" class="form-control" id="nip" aria-describedby="nip">
                         </div>
 

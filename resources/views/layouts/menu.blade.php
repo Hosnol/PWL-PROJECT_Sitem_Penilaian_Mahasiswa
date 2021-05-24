@@ -7,7 +7,13 @@
             <a class="nav-link" href={{ route('dosen.index') }}>Dosen</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Mahasiswa</a>
+            <a class="nav-link" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Mata Kuliah</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Kelas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">User</a>

@@ -13,9 +13,15 @@ class DosenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $cari = $request->get('cari');
         $dosen = Dosen::paginate(5);
+
+        if($cari){
+            $dosen = dosen::where('nama','like','%'.$cari.'%')
+            ->orwhere('nip','like','%'.$cari.'%')->paginate(5);
+        }
         return view('index_dosen', ['dsn' => $dosen]);
     }
 
@@ -132,15 +138,5 @@ class DosenController extends Controller
     {
         Dosen::find($id)->delete();
         return redirect()->route('dosen.index')-> with('success', 'Data dosen berhasil dihapus');
-    }
-
-    public function cari(Request $request){
-        //melakukan validasi data
-        $cari=$request->cari;
-
-        $dosen = dosen::where('nama','like','%'.$cari.'%')
-        ->orwhere('nip','like','%'.$cari.'%')->paginate(5);
-
-        return view('index_dosen',['dsn'=>$dosen]);
     }
 }

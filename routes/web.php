@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MahasiswaController;
+use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +28,7 @@ Auth::routes();
 Route::middleware(['role:admin'])->group(function (){
     Route::get('/admin', [HomeController::class, 'admin'])->name('admin');
     Route::resource('admin/dosen', DosenController::class);
-    Route::get('/admin/cari',[DosenController::class,'cari'])->name('dosen.cari');
+    Route::resource('admin/mahasiswa', MahasiswaController::class);
 });
 
 Route::middleware(['role:dosen'])->group(function (){
