@@ -32,6 +32,14 @@
                                 <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama" >
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="jk">Jenis Kelamin</label>
+                            <select name="jk" class="form-control">
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
                         
                         <div class="form-group">
                             <label for="kelas">Kelas</label>

@@ -49,6 +49,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'jk' => 'required',
             'kelas' => 'required',
             'nohp' => 'required',
             'alamat' => 'required',
@@ -60,6 +61,7 @@ class MahasiswaController extends Controller
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
+        $mahasiswa->jk = $request->get('jk');
         $mahasiswa->nohp = $request->get('nohp');
         $mahasiswa->alamat = $request->get('alamat');
         $mahasiswa->foto = $image_name;
@@ -111,6 +113,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'jk' => 'required',
             'kelas' => 'required',
             'nohp' => 'required',
             'alamat' => 'required',
@@ -121,6 +124,7 @@ class MahasiswaController extends Controller
 
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
+        $mahasiswa->jk = $request->get('jk');
         $mahasiswa->nohp = $request->get('nohp');
         $mahasiswa->alamat = $request->get('alamat');
 

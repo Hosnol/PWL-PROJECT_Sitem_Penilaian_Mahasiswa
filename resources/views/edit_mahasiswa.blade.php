@@ -35,6 +35,15 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="jk">Jenis Kelamin</label>
+                            <select name="jk" class="form-control">
+                                <option> {{ $Mahasiswa->jk }}</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="kelas">Kelas</label>
                             <select name="kelas" class="form-control">
                                 @foreach ($kelas as $item)

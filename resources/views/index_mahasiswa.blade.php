@@ -28,6 +28,7 @@
                                 <tr>
                                     <th>Nim</th>
                                     <th>Nama</th>
+                                    <th>Jenis Kelamin</th>
                                     <th>Kelas</th>
                                     <th>No Handphone</th>
                                     <th>Alamat</th>
@@ -38,6 +39,7 @@
                                 <tr>
                                     <td>{{ $m->nim }}</td>
                                     <td>{{ $m->nama }}</td>
+                                    <td>{{ $m->jk }}</td>
                                     <td>{{ $m->kelas->nama_kelas }}</td>
                                     <td>{{ $m->nohp }}</td>
                                     <td>{{ $m->alamat }}</td>
