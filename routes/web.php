@@ -3,7 +3,7 @@
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
-use App\Models\Mahasiswa;
+use App\Http\Controllers\MatakuliahController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +29,7 @@ Route::middleware(['role:admin'])->group(function (){
     Route::get('/admin', [HomeController::class, 'admin'])->name('admin');
     Route::resource('admin/dosen', DosenController::class);
     Route::resource('admin/mahasiswa', MahasiswaController::class);
+    Route::resource('admin/matakuliah', MatakuliahController::class);
 });
 
 Route::middleware(['role:dosen'])->group(function (){
