@@ -10,7 +10,7 @@
             <a class="nav-link" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Mata Kuliah</a>
+            <a class="nav-link" href="{{ route('matakuliah.index') }}">Mata Kuliah</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Kelas</a>
