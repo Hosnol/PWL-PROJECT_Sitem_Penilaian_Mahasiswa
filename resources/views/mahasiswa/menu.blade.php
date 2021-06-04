@@ -4,10 +4,10 @@
             <a class="nav-link" href="#">Dashbord</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Profil</a>
+            <a class="nav-link" href="#">Jadwal Kuliah</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Nilai Mahasiswa</a>
+            <a class="nav-link" href="#">Nilai</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">User</a>

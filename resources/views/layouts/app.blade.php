@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
+    
 </head>
 <body>
     <div id="app">
@@ -32,7 +35,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @include('layouts.menu')
+                        @if (Auth::user()->hasRole('admin'))
+                            @include('layouts.menu')
+                        @endif
+
+                        @if (Auth::user()->hasRole('dosen'))
+                            @include('dosen.menu')
+                        @endif
+
+                        @if (Auth::user()->hasRole('mahasiswa'))
+                            @include('mahasiswa.menu')
+                        @endif                            
                     </ul>
 
                     <!-- Right Side Of Navbar -->
