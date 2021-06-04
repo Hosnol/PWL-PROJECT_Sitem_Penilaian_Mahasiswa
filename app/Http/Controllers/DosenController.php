@@ -49,11 +49,14 @@ class DosenController extends Controller
             'jk' => 'required',
             'email' => 'required',
             'nohp' => 'required',
-            'alamat' => 'required',
-            'gambar' => 'required'
+            'alamat' => 'required'
         ]);
 
-        $image_name = $request->file('gambar')->store('image','public');
+        if($request->file('gambar')){
+            $image_name = $request->file('gambar')->store('image','public');
+        }else{
+            $image_name= null;
+        }
 
         $dosen = new dosen;
         $dosen->nip = $request->get('nip');
@@ -106,8 +109,7 @@ class DosenController extends Controller
             'jk' => 'required',
             'email' => 'required',
             'nohp' => 'required',
-            'alamat' => 'required',
-            'gambar' => 'required'
+            'alamat' => 'required'
         ]);
 
         $dosen = dosen::where('id',$id)->first();

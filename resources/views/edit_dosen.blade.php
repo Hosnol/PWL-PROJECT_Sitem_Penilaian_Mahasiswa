@@ -60,7 +60,7 @@
                         
                         <div class="form-group">
                             <label for="gambar">Foto</label>
-                            <input type="file" class="form-control-file" required="required" name="gambar" value="{{ $dosen->gambar }}">
+                            <input type="file" class="form-control-file" name="gambar" value="{{ $dosen->gambar }}">
                             <br><img width="150px" src="{{asset('storage/'.$dosen->gambar)}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

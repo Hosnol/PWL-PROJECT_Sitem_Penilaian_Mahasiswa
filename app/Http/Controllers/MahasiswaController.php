@@ -53,10 +53,13 @@ class MahasiswaController extends Controller
             'kelas' => 'required',
             'nohp' => 'required',
             'alamat' => 'required',
-            'foto' => 'required'
         ]);
 
-        $image_name = $request->file('foto')->store('image','public');
+        if($request->file('foto')){
+            $image_name = $request->file('foto')->store('image','public');
+        }else{
+            $image_name= null;
+        }
 
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('nim');
@@ -117,7 +120,6 @@ class MahasiswaController extends Controller
             'kelas' => 'required',
             'nohp' => 'required',
             'alamat' => 'required',
-            'foto' => 'required'
         ]);
 
         $mahasiswa = Mahasiswa::with('kelas')->where('id',$id)->first();

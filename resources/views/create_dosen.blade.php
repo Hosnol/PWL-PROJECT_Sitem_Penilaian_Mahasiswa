@@ -25,18 +25,18 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nip">Nip</label>
-                            <input type="text" name="nip" class="form-control" id="nip" aria-describedby="nip">
+                            <input type="text" name="nip" required = "required" class="form-control" id="nip" aria-describedby="nip">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="nama">Nama</label>
-                            <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama">
+                            <input type="nama" name="nama" required = "required" class="form-control" id="nama" aria-describedby="nama">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="jk">Jenis Kelamin</label>
-                        <select name="jk" class="form-control">
+                        <select name="jk" required = "required" class="form-control">
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
@@ -44,22 +44,22 @@
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
+                        <input type="email" name="email" required = "required" class="form-control" id="email" aria-describedby="email">
                     </div>
 
                     <div class="form-group">
                         <label for="nohp">No Handphone</label>
-                        <input type="nohp" name="nohp" class="form-control" id="nohp" aria-describedby="nohp">
+                        <input type="nohp" name="nohp" required = "required" class="form-control" id="nohp" aria-describedby="nohp">
                     </div>
 
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
-                        <textarea type="alamat" name="alamat" row="3" id="alamat" class="form-control"></textarea>
+                        <textarea type="alamat" name="alamat" row="3" id="alamat" required = "required" class="form-control"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="gambar">Foto</label>
-                        <input type="file" class="form-control-file" required = "required" id="gambar" name="gambar">
+                        <input type="file" class="form-control-file" id="gambar" name="gambar">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>

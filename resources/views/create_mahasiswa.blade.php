@@ -25,17 +25,17 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="nim">Nim</label>
-                                <input type="text" name="nim" class="form-control" id="nim" aria-describedby="nim" >
+                                <input type="text" name="nim" required = "required" class="form-control" id="nim" aria-describedby="nim" >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="nama">Nama</label>
-                                <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama" >
+                                <input type="nama" name="nama" required = "required" class="form-control" id="nama" aria-describedby="nama" >
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="jk">Jenis Kelamin</label>
-                            <select name="jk" class="form-control">
+                            <select name="jk" required = "required" class="form-control">
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>
@@ -52,17 +52,17 @@
 
                         <div class="form-group">
                             <label for="nohp">No Handphone</label>
-                            <input type="nohp" name="nohp" class="form-control" id="nohp" aria-describedby="nohp">
+                            <input type="nohp" name="nohp" required = "required" class="form-control" id="nohp" aria-describedby="nohp">
                         </div>
 
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <textarea type="alamat" name="alamat" row="3" id="alamat" class="form-control"></textarea>
+                            <textarea type="alamat" name="alamat" row="3" id="alamat" required = "required" class="form-control"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for = "foto">Foto</label>
-                            <input type  = "file" class = "form-control-file" required = "required" name = "foto">
+                            <input type  = "file" class = "form-control-file" name = "foto">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a class="btn btn-success" href="{{ route('mahasiswa.index') }}">Kembali</a>
