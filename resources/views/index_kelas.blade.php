@@ -26,7 +26,7 @@
                     </div>
                     @endif
                     <div class="mt-2">
-                        <div class="table-responsive-sm">
+                        <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
                                     <th>No</th>
