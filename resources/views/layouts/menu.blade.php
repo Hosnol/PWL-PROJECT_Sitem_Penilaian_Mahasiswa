@@ -16,7 +16,7 @@
             <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">User</a>
+            <a class="nav-link" href="{{ route('user.index') }}">User</a>
         </li>
     </ul>
 </div>
