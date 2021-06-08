@@ -141,4 +141,10 @@ class DosenController extends Controller
         Dosen::find($id)->delete();
         return redirect()->route('dosen.index')-> with('success', 'Data dosen berhasil dihapus');
     }
+
+    public function profilDosen($id)
+    {
+        $dosen = dosen::where('user_id',$id)->first();
+        return view('dosen.profil', ['dsn' => $dosen]);
+    }
 }

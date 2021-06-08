@@ -38,6 +38,8 @@ Route::middleware(['role:admin'])->group(function (){
 
 Route::middleware(['role:dosen'])->group(function (){
     Route::get('/dosen', [HomeController::class, 'dosen'])->name('dosen');
+    Route::get('dosen/profil/{id}',[DosenController::class, 'profilDosen'])->name('dosen.profil');
+    
 });
 
 Route::middleware(['role:mahasiswa'])->group(function (){
