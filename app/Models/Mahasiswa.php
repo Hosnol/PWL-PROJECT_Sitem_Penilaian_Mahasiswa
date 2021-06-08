@@ -16,8 +16,13 @@ class Mahasiswa extends Model
     public function kelas(){
         return $this->belongsTo(Kelas::class);
     }
+
     public function matakuliah(){
         return $this->belongsToMany(Matakuliah::class)->withPivot('nilai');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }
