@@ -13,14 +13,14 @@
                             <img class="rounded float-left" width="200px" height="200px" src="{{asset('storage/'.$dsn->gambar)}}">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group mt-4 col-md-2">
                             <p><b>NIP <p>
                             <p>Nama </p>
                             <p>Email</p>
                             <p>Alamat</p></b>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mt-4 ">
                             <p> {{ $dsn->nip }} </p>
                             <p> {{ $dsn->nama }} </p>
                             <p> {{ $dsn->email }} </p>
