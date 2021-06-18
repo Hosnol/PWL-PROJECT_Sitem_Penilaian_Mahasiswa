@@ -7,10 +7,7 @@
             <a class="nav-link" href="{{ route('dosen.profil', Auth::user()->id ) }}">Profil</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Nilai Mahasiswa</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">User</a>
+            <a class="nav-link" href="{{ route('dosen.mahasiswa') }}">Nilai Mahasiswa</a>
         </li>
     </ul>
 </div>

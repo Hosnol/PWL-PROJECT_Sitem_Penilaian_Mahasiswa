@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dosen;
+use App\Models\Matakuliah;
+use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Storage;
 
 class DosenController extends Controller
@@ -79,7 +81,9 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        //
+        $Mahasiswa = Mahasiswa::find($id);
+        $matkul = Matakuliah::all();
+        return view('dosen.profil-mahasiswa',['Mahasiswa'=>$Mahasiswa, 'matkul'=>$matkul]);
     }
 
     /**
@@ -146,5 +150,28 @@ class DosenController extends Controller
     {
         $dosen = dosen::where('user_id',$id)->first();
         return view('dosen.profil', ['dsn' => $dosen]);
+    }
+
+    public function tampilMahasiswa(Request $request){
+        $cari = $request->get('cari');
+        $mhs = Mahasiswa::with('kelas')->paginate(5);
+
+        if($cari){
+            $mhs = Mahasiswa::with('kelas')->where('nama','like','%'.$cari.'%')
+            ->orWhere('nim','like','%'.$cari.'%')->paginate(5);
+        }
+
+        return view('dosen.tampil-mahasiswa', ['mhs'=>$mhs]);
+    }
+
+    public function AddNilai(Request $request, $id)
+    {
+        $Mahasiswa = Mahasiswa::find($id);
+        if($Mahasiswa->matakuliah()->where('matakuliah_id',$request->matakuliah)->exists()){
+            return redirect()->route('dosen.profil-mahasiswa',$id)-> with('error', 'Nilai matakuliah sudah ada!!');
+        }
+        $Mahasiswa->matakuliah()->attach($request->matakuliah, ['nilai' => $request->nilai]);
+
+        return redirect()->route('dosen.profil-mahasiswa',$id)-> with('success', 'Nilai berhasil ditambahkan');
     }
 }

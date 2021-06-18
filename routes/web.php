@@ -39,6 +39,9 @@ Route::middleware(['role:admin'])->group(function (){
 Route::middleware(['role:dosen'])->group(function (){
     Route::get('/dosen', [HomeController::class, 'dosen'])->name('dosen');
     Route::get('dosen/profil/{id}',[DosenController::class, 'profilDosen'])->name('dosen.profil');
+    Route::get('dosen/tampilMahasiswa', [DosenController::class, 'tampilMahasiswa'])->name('dosen.mahasiswa');
+    Route::get('dosen/profil-mahasiswa/{id}',[DosenController::class, 'show'])->name('dosen.profil-mahasiswa');
+    Route::post('dosen/add-nilai/{id}',[DosenController::class, 'AddNilai'])->name('dosen.addnilai');
     
 });
 
