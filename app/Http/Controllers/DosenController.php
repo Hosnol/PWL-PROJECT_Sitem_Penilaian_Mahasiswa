@@ -174,4 +174,11 @@ class DosenController extends Controller
 
         return redirect()->route('dosen.profil-mahasiswa',$id)-> with('success', 'Nilai berhasil ditambahkan');
     }
+
+    public function DeleteNilai($id, $matakuliah_id)
+    {
+        $Mahasiswa = Mahasiswa::find($id);
+        $Mahasiswa->matakuliah()->detach($matakuliah_id);
+        return redirect()->back()-> with('success', 'Nilai berhasil dihapus');
+    }
 }

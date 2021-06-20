@@ -41,7 +41,7 @@
                     @endif
                     <div class="mt-2">
                         <div class="float-right my-2 mr-sm-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                            <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#exampleModal">
                                 Tambah Nilai
                             </button>
@@ -51,8 +51,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Matakuliah</th>
-                                    <th> SKS </th>
+                                    <th>SKS</th>
                                     <th>Nilai</th>
+                                    <th>Action</th>
                                 </tr>
                                 @foreach ($Mahasiswa->matakuliah as $no => $mapel )
                                 <tr>
@@ -60,10 +61,19 @@
                                     <td>{{ $mapel->nama_matkul }}</td>
                                     <td>{{ $mapel->sks }}</td>
                                     <td>{{ $mapel->pivot->nilai }}</td>
+                                    <td>
+                                        <form action="{{ route('dosen.deletenilai',['id'=>$Mahasiswa->id, 'matakuliah_id'=>$mapel->id])}}" method="POST"
+                                            onsubmit="return confirm('Anda yakin ingin menghapus data?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </table>
                         </div>
+                        <a class="btn btn-primary" href="{{ route('dosen.mahasiswa') }}">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -71,7 +81,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal 1-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
