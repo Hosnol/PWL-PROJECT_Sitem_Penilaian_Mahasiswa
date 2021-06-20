@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\UserController;
+use App\Models\Jadwal;
+use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,7 @@ Route::middleware(['role:admin'])->group(function (){
     Route::resource('admin/matakuliah', MatakuliahController::class);
     Route::resource('admin/kelas', KelasController::class);
     Route::resource('admin/user', UserController::class);
+    Route::resource('admin/jadwal', JadwalController::class);
 });
 
 Route::middleware(['role:dosen'])->group(function (){
@@ -47,4 +51,5 @@ Route::middleware(['role:dosen'])->group(function (){
 
 Route::middleware(['role:mahasiswa'])->group(function (){
     Route::get('/mahasiswa', [HomeController::class, 'mhs'])->name('mahasiswa');
+    Route::get('mahasiswa/jadwal-kuliah/{id}',[JadwalController::class, 'show'])->name('mahasiswa.jadwal');
 });
