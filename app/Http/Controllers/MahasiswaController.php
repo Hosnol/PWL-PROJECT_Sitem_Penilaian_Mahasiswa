@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -159,5 +160,18 @@ class MahasiswaController extends Controller
     {
         Mahasiswa::find($id)->delete();
         return redirect()->route('mahasiswa.index')-> with('success', 'Mahasiswa berhasil dihapus');
+    }
+
+    public function nilai($id)
+    {   
+        $Mahasiswa = Mahasiswa::find($id);
+        return view('mahasiswa.nilai-mahasiswa',['Mahasiswa'=>$Mahasiswa]);
+    }
+
+    public function cetak($id)
+    {
+        $mahasiswa = Mahasiswa::find($id);
+        $pdf = PDF::loadview('mahasiswa.nilai-pdf',['mhs'=>$mahasiswa]);
+        return $pdf->stream();
     }
 }

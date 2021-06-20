@@ -46,10 +46,12 @@ Route::middleware(['role:dosen'])->group(function (){
     Route::get('dosen/tampilMahasiswa', [DosenController::class, 'tampilMahasiswa'])->name('dosen.mahasiswa');
     Route::get('dosen/profil-mahasiswa/{id}',[DosenController::class, 'show'])->name('dosen.profil-mahasiswa');
     Route::post('dosen/add-nilai/{id}',[DosenController::class, 'AddNilai'])->name('dosen.addnilai');
-    
+    Route::delete('dosen/delete-nilai/{id}/{matakuliah_id}',[DosenController::class, 'DeleteNilai'])->name('dosen.deletenilai');
 });
 
 Route::middleware(['role:mahasiswa'])->group(function (){
     Route::get('/mahasiswa', [HomeController::class, 'mhs'])->name('mahasiswa');
     Route::get('mahasiswa/jadwal-kuliah/{id}',[JadwalController::class, 'show'])->name('mahasiswa.jadwal');
+    Route::get('mahasiswa/nilai/{id}',[MahasiswaController::class, 'nilai'])->name('mahasiswa.nilai');
+    Route::get('mahasiswa/cetak-nilai/{id}', [MahasiswaController::class, 'cetak'])->name('mahasiswa.cetak');
 });

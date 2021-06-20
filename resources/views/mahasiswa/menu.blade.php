@@ -7,7 +7,7 @@
             <a class="nav-link" href="{{ route('mahasiswa.jadwal',Auth::user()->mahasiswa->kelas_id) }}">Jadwal Kuliah</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Nilai</a>
+            <a class="nav-link" href="{{ route('mahasiswa.nilai', Auth::user()->mahasiswa->id) }}">Nilai</a>
         </li>
     </ul>
 </div>
