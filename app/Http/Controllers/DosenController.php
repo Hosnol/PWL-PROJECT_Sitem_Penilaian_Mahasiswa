@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dosen;
 use App\Models\Matakuliah;
 use App\Models\Mahasiswa;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class DosenController extends Controller
@@ -34,7 +35,8 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('create_dosen');
+        $user = User::all();
+        return view('create_dosen',['user'=>$user]);
     }
 
     /**
@@ -70,6 +72,12 @@ class DosenController extends Controller
         $dosen->gambar = $image_name;
         $dosen->save();
 
+        $user = new User;
+        $user->id = $request->get('user');
+
+        $dosen->user()->associate($user);
+        $dosen->save();
+
         return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil ditambahkan');
     }
 
@@ -95,7 +103,8 @@ class DosenController extends Controller
     public function edit($id)
     {
         $dosen = Dosen::find($id);
-        return view('edit_dosen', compact('dosen'));
+        $user = User::all();
+        return view('edit_dosen', compact('dosen', 'user'));
     }
 
     /**
@@ -129,6 +138,12 @@ class DosenController extends Controller
         }
         $image_name = $request->file('gambar')->store('image', 'public');
         $dosen->gambar = $image_name;
+        $dosen->save();
+
+        $user = new User;
+        $user->id = $request->get('user');
+
+        $dosen->user()->associate($user);
         $dosen->save();
 
         return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil diupdate');

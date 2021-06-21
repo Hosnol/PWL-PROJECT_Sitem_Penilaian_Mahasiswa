@@ -58,6 +58,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="user">User</label>
+                        <select name="user" class="form-control">
+                            <option value="{{ NULL }}">-- PILIH --</option>
+                            @foreach ($user as $item)
+                                <option value="{{ $item->id }}">{{ $item->email }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="gambar">Foto</label>
                         <input type="file" class="form-control-file" id="gambar" name="gambar">
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
@@ -36,7 +37,8 @@ class MahasiswaController extends Controller
     public function create()
     {
         $kelas = Kelas::all();
-        return view('create_mahasiswa',['kelas'=>$kelas]);
+        $user = User::all();
+        return view('create_mahasiswa',['kelas'=>$kelas, 'user'=>$user]);
     }
 
     /**
@@ -77,6 +79,12 @@ class MahasiswaController extends Controller
         $mahasiswa->kelas()->associate($kelas);
         $mahasiswa->save();
 
+        $user = new User;
+        $user->id = $request->get('user');
+
+        $mahasiswa->user()->associate($user);
+        $mahasiswa->save();
+
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan');
 
     }
@@ -102,7 +110,8 @@ class MahasiswaController extends Controller
     {
         $Mahasiswa = Mahasiswa::with('kelas')->where('id', $id)->first();
         $kelas = Kelas::all();
-        return view('edit_mahasiswa', compact('Mahasiswa','kelas'));
+        $user = User::all();
+        return view('edit_mahasiswa', compact('Mahasiswa','kelas','user'));
     }
 
     /**
@@ -144,6 +153,12 @@ class MahasiswaController extends Controller
 
         //fungsi eloquent untuk menambah data dengan relasi belongTo
         $mahasiswa->kelas()->associate($kelas);
+        $mahasiswa->save();
+
+        $user = new User;
+        $user->id = $request->get('user');
+
+        $mahasiswa->user()->associate($user);
         $mahasiswa->save();
 
         //jika data berhasil ditambahkan, akan kembali ke halaman utama

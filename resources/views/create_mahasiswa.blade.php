@@ -43,7 +43,7 @@
                         
                         <div class="form-group">
                             <label for="kelas">Kelas</label>
-                            <select name="kelas" class="form-control">
+                            <select name="kelas" class="form-control" required ="required">
                                 @foreach ($kelas as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kelas }}</option>
                                 @endforeach
@@ -58,6 +58,16 @@
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
                             <textarea type="alamat" name="alamat" row="3" id="alamat" required = "required" class="form-control"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user">User</label>
+                            <select name="user" class="form-control">
+                                <option value="{{ NULL }}">-- PILIH --</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->email }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">

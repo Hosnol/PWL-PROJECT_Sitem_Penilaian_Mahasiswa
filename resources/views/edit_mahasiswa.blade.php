@@ -61,6 +61,15 @@
                             <label for="alamat">Alamat</label>
                             <textarea type="alamat" name="alamat" row="3" id="alamat" class="form-control">{{ $Mahasiswa->alamat }}</textarea>
                         </div>
+
+                        <div class="form-group">
+                            <label for="user">User</label>
+                            <select name="user" class="form-control">
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}" {{ $Mahasiswa->user_id == $item->id ? 'selected': '' }}>{{ $item->email }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         
                         <div class="form-group">
                             <label for="foto">Foto</label>
