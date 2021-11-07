@@ -4,6 +4,9 @@
             <a class="nav-link" href={{ route('admin') }}>Dashbord</span></a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.index') }}">User</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href={{ route('dosen.index') }}>Dosen</a>
         </li>
         <li class="nav-item">
@@ -11,9 +14,6 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.index') }}">User</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('matakuliah.index') }}">Mata Kuliah</a>

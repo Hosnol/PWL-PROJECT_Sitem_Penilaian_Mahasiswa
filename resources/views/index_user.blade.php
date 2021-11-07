@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">{{ __('Matakuliah') }}</div>
+                <div class="card-header">{{ __('User') }}</div>
                 <div class="card-body">
                     <div class="float-right my-2 mr-sm-2">
                         <div class="float-right my-2 mr-sm-2">
@@ -14,7 +14,7 @@
                     </div>
                     <nav class="navbar">
                         <form class="form-inline" action="{{ route('user.index') }}" method="GET">
-                            <input class="form-control mr-sm-2" type="search" name="cari" placeholder="Cari kelas..."
+                            <input class="form-control mr-sm-2" type="search" name="cari" placeholder="Cari user..."
                                 aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
