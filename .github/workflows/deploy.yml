@@ -141,6 +141,6 @@ jobs:
             sudo echo 'SESSION_DRIVER=file' >> .env
             sudo echo 'SESSION_LIFETIME=120' >> .env
             sudo /usr/local/bin/docker exec app composer install
-            sudo /usr/local/bin/docker exec showroom php artisan migrate
-            sudo /usr/local/bin/docker exec showroom php artisan db:seed
-            sudo /usr/local/bin/docker exec showroom php artisan optimize:clear
+            sudo /usr/local/bin/docker exec app php artisan migrate
+            sudo /usr/local/bin/docker exec app php artisan db:seed
+            sudo /usr/local/bin/docker exec app php artisan optimize:clear
