@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: hosnol19/penilaian
+    image: hosnol19/penilaian:latest
     container_name: app
     restart: unless-stopped
     tty: true
