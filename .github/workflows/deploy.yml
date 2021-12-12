@@ -121,11 +121,7 @@ jobs:
             sudo firewall-cmd --zone=docker --add-service=http --permanent
             sudo firewall-cmd --reload
             sudo pip3 install docker-compose
-            cd /var/www/html/
-            sudo cp .env.example .env
-            sudo chmod -R 777 storage
-            sudo chmod -R 777 bootstrap
-            sudo chmod -R 777 public
+            sudo /usr/local/bin/docker-compose up -d
             sudo echo 'APP_NAME=${{secrets.APP_NAME}}' >> .env
             sudo echo 'APP_URL=${{secrets.HOST}}' >> .env
             sudo echo 'APP_ENV=local' >> .env
@@ -144,8 +140,3 @@ jobs:
             sudo echo 'QUEUE_CONNECTION=sync' >> .env
             sudo echo 'SESSION_DRIVER=file' >> .env
             sudo echo 'SESSION_LIFETIME=120' >> .env
-            sudo docker-compose up -d
-            sudo docker exec app composer install
-            sudo docker exec app php artisan migrate
-            sudo docker exec app php artisan db:seed
-            sudo docker exec app php artisan optimize:clear
