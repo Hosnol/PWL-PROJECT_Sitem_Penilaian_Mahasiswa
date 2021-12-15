@@ -143,7 +143,7 @@ jobs:
             mysql -u ${{ secrets.DB_USERNAME }} -p -h ${{ secrets.DB_HOST }}
             echo ${{ secrets.DB_PASSWORD }}
             create database ${{ secrets.DB_DATABASE }};
-            grant all privilages on ${{ secrets.DB_DATABASE }} to ${{ secrets.DB_USERNAME }};
+            grant all privileges on ${{ secrets.DB_DATABASE }} to ${{ secrets.DB_USERNAME }};
             exit
             sudo docker exec app /bin/bash -c "php artisan config:clear"
             sudo docker exec app /bin/bash -c "php artisan migrate:fresh --seed"
