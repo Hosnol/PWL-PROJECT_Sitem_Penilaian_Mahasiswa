@@ -1,4 +1,4 @@
-name: deploy-laravel
+name: kuis2 cloud
 on:
   push:
     branches:
