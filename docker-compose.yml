@@ -14,7 +14,7 @@ services:
 
   #Nginx Service
   webserver:
-    image: hosnol19/penilaian-docker-web_server:latest
+    image: hosnol19/penilaian-web_server:latest
     container_name: web_server
     restart: unless-stopped
     tty: true
