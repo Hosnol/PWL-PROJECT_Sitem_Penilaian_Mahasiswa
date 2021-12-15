@@ -23,8 +23,12 @@ jobs:
 
       - name: 'Build and push'
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/penilaian .
-          docker push ${{ secrets.DOCKERHUB_USERNAME}}/penilaian
+          docker build -f Docker/dockerfile/app.Dockerfile -t app .
+          docker build -f Docker/dockerfile/web_server.Dockerfile -t web_server .
+          docker tag app ${{ secrets.DOCKERHUB_USERNAME}}/penilaian-docker
+          docker tag web_server ${{ secrets.DOCKERHUB_USERNAME}}/penilaian-web_server
+          docker push ${{ secrets.DOCKERHUB_USERNAME}}/penilaian-docker
+          docker push ${{ secrets.DOCKERHUB_USERNAME}}/penilaian-web_server
 
       - name: 'Write config'
         run: |
@@ -102,7 +106,7 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{ env.INSTANCE_IP }}
-          username: opc
+          username: ubuntu
           key: ${{ secrets.OCI_KEY_FILE }}
           source: "docker-compose.yml"
           target: "./"
@@ -111,36 +115,23 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{env.INSTANCE_IP}}
-          username: opc
+          username: ubuntu
           key: ${{secrets.OCI_KEY_FILE}}
           script: |
-            sudo yum install -y yum-utils
-            sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-            sudo yum install -y docker-ce docker-ce-cli containerd.io
-            sudo systemctl restart docker
-            sudo firewall-cmd --zone=docker --add-service=http --permanent
-            sudo firewall-cmd --reload
-            sudo pip3 install docker-compose
-            sudo /usr/local/bin/docker-compose up -d
-            sudo echo 'APP_NAME=${{secrets.APP_NAME}}' >> .env
-            sudo echo 'APP_URL=${{secrets.HOST}}' >> .env
-            sudo echo 'APP_ENV=local' >> .env
-            sudo echo 'APP_KEY=${{secrets.APP_KEY}}' >> .env
-            sudo echo 'APP_DEBUG=true' >> .env
-            sudo echo 'LOG_CHANNEL=stack' >> .env
-            sudo echo 'LOG_LEVEL=debug' >> .env
-            sudo echo 'DB_CONNECTION=${{secrets.DB_CONNECTION}}' >> .env
-            sudo echo 'DB_HOST=${{secrets.DB_HOST}}' >> .env
-            sudo echo 'DB_PORT=${{secrets.DB_PORT}}' >> .env
-            sudo echo 'DB_DATABASE=${{secrets.DB_DATABASE}}' >> .env
-            sudo echo 'DB_USERNAME=${{secrets.DB_USERNAME}}' >> .env
-            sudo echo 'DB_PASSWORD=${{secrets.DB_PASSWORD}}' >> .env
-            sudo echo 'BROADCAST_DRIVER=log' >> .env
-            sudo echo 'CACHE_DRIVER=file' >> .env
-            sudo echo 'QUEUE_CONNECTION=sync' >> .env
-            sudo echo 'SESSION_DRIVER=file' >> .env
-            sudo echo 'SESSION_LIFETIME=120' >> .env
-            sudo /usr/local/bin/docker exec app composer install
-            sudo /usr/local/bin/docker exec app php artisan migrate
-            sudo /usr/local/bin/docker exec app php artisan db:seed
-            sudo /usr/local/bin/docker exec app php artisan optimize:clear
+            sudo apt install apt-transport-https ca-certificates curl software-properties-common
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+            sudo apt update
+            sudo apt install docker-ce
+            sudo docker pull hosnol19/penilaian-docker
+            sudo docker pull hosnol19/penilaian-web_server
+            sudo docker-compose up -d
+            sudo docker exec app /bin/bash -c "php artisan key:generate"
+            sudo docker exec app /bin/bash -c "echo 'DB_CONNECTION=${{ secrets.DB_CONNECTION }}' >> .env"
+            sudo docker exec app /bin/bash -c "echo 'DB_HOST=${{ secrets.DB_HOST }}' >> .env"
+            sudo docker exec app /bin/bash -c "echo 'DB_PORT=${{ secrets.DB_PORT }}' >> .env"
+            sudo docker exec app /bin/bash -c "echo 'DB_DATABASE=${{ secrets.DB_DATABASE }}' >> .env"
+            sudo docker exec app /bin/bash -c "echo 'DB_USERNAME=${{ secrets.DB_USERNAME }}' >> .env"
+            sudo docker exec app /bin/bash -c "echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' >> .env"
+            sudo docker exec app /bin/bash -c "echo 'DB_REDIS=cache' >> .env"
+            sudo docker exec app /bin/bash -c "php artisan migrate:fresh --seed"
+            sudo docker exec app /bin/bash -c "php artisan storage:link"
