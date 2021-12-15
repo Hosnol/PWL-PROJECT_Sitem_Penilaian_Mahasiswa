@@ -6,32 +6,34 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: hosnol19/penilaian:latest
+    image: hosnol19/penilaian-docker:latest
     container_name: app
     restart: unless-stopped
     tty: true
-    environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
+    depends_on:
+      - cache
     networks:
       - app-network
 
   #Nginx Service
   webserver:
-    image: nginx:alpine
-    container_name: webserver
+    image: hosnol19/penilaian-docker-web_server:latest
+    container_name: web_server
     restart: unless-stopped
     tty: true
     ports:
-      - "8090:8090"
-    volumes:
-      - ./:/var/www/html
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - "8020:80"
+    depends_on:
+      - cache
     networks:
       - app-network
+
+    cache:
+      image: redis:alpine
+      container_name: cache
+      restart: unless-stopped
+      networks:
+        - app-network
 
 #Docker Networks
 networks:
