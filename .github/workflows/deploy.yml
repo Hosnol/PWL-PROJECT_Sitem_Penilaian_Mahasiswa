@@ -141,10 +141,10 @@ jobs:
             sudo docker exec app /bin/bash -c "echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' >> .env"
             sudo docker exec app /bin/bash -c "echo 'DB_REDIS=cache' >> .env"
             sudo apt-get install -y mysql-client-core-8.0
-            echo "SELECT 'OK';" | mysql --user="${{ secrets.DB_USERNAME }}" --password="${{ secrets.DB_PASSWORD }}" --host="${{ secrets.DB_HOST }}"
-            create database ${{ secrets.DB_DATABASE }};
-            grant all privileges on ${{ secrets.DB_DATABASE }} to ${{ secrets.DB_USERNAME }};
-            exit
+            mysql --user="${{ secrets.DB_USERNAME }}" --password="${{ secrets.DB_PASSWORD }}" --host="${{ secrets.DB_HOST }}"
+              create database ${{ secrets.DB_DATABASE }};
+              grant all privileges on ${{ secrets.DB_DATABASE }} to ${{ secrets.DB_USERNAME }};
+              exit
             sudo docker exec app /bin/bash -c "php artisan config:clear"
             sudo docker exec app /bin/bash -c "php artisan migrate:fresh --seed"
             sudo docker exec app /bin/bash -c "php artisan storage:link"
