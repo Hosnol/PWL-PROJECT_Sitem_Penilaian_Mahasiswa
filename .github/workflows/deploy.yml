@@ -141,8 +141,7 @@ jobs:
             sudo docker exec app /bin/bash -c "echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' >> .env"
             sudo docker exec app /bin/bash -c "echo 'DB_REDIS=cache' >> .env"
             sudo apt-get install -y mysql-client-core-8.0
-            mysql -u ${{ secrets.DB_USERNAME }} -p -h ${{ secrets.DB_HOST }}
-            echo ${{ secrets.DB_PASSWORD }}
+            mysql -u ${{ secrets.DB_USERNAME }} -p ${{ secrets.DB_PASSWORD }} -h ${{ secrets.DB_HOST }}
             create database ${{ secrets.DB_DATABASE }};
             grant all privileges on ${{ secrets.DB_DATABASE }} to ${{ secrets.DB_USERNAME }};
             exit
