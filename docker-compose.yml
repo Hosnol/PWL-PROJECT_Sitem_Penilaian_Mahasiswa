@@ -25,12 +25,12 @@ services:
     networks:
       - app-network
 
-    cache:
-      image: redis:alpine
-      container_name: cache
-      restart: unless-stopped
-      networks:
-        - app-network
+  cache:
+    image: redis:alpine
+    container_name: cache
+    restart: unless-stopped
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
